@@ -1,27 +1,32 @@
 <p class="text-center" id="deleteRes"></p>
 <table class="table table-condensed table-responsive">
-	<thead>	
+	<thead>
 		<tr>
-			<th>Name</th>
-			<th>Mobile</th>
-			<th>Email</th>
-			<th>Permanent Address</th>
-			<th>Temporary Address</th>
-			<th>Action</th>
+			<th>No</th>
+			<th>Amount</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Surname</th>
+			<th>Village Name</th>
+			<th>Actiona</th>
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 			$res = mysqli_query($con, "SELECT * FROM persons");
-			while($row = mysqli_fetch_array($res)){
+			$count = 1;
+			while($row = mysqli_fetch_array($res))
+			{
 				echo '<tr id="'.$row['ID'].'">
-						<td>'.$row['Name'].'</td>
-						<td>'.$row['Mobile'].'</td>
-						<td>'.$row['Email'].'</td>
-						<td style="word-wrap:break-word;">'.$row['Permanant_Address'].'</td>
-						<td>'.$row['Temporary_Address'].'</td>
+						<td>'.$count.'</td>
+						<td>'.$row['Amount'].'</td>
+						<td>'.$row['First_Name'].'</td>
+						<td>'.$row['Last_Name'].'</td>
+						<td>'.$row['Surname'].'</td>
+						<td>'.$row['Village_Name'].'</td>
 						<td><button class="btn btn-danger" id="'.$row['ID'].'">Remove</button></td>
-					  </tr>';				
+					  </tr>';
+				$count++;
 			}
 		?>
 	</tbody>

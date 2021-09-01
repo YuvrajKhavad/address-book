@@ -6,6 +6,20 @@
 	}
 	$row = mysqli_fetch_array(mysqli_query($con, "SELECT count(*) FROM persons"));
 	$personsCount = $row[0];
+
+	// get all amout
+	$res = mysqli_query($con, "SELECT * FROM persons");
+	$availableAmount = $availableFirstName = $availableLastName = $availableSurname  = $availableVillageName = "";
+	$tagStart = "[";
+	while($row = mysqli_fetch_array($res))
+	{
+		$availableAmount .='"'.$row['Amount'].'",';
+		$availableFirstName .='"'.$row['First_Name'].'",';
+		$availableLastName .='"'.$row['Last_Name'].'",';
+		$availableSurname .='"'.$row['Surname'].'",';
+		$availableVillageName .='"'.$row['Village_Name'].'",';
+	}
+	$tagEnd = "]";
 ?>
 <html>
 	<head>
@@ -14,11 +28,12 @@
 		<link rel="stylesheet" type="text/css" href="../css/custom.css">
 		<link rel="stylesheet" type="text/css" href="css/custom.css">
 		<link href="https://fonts.googleapis.com/css?family=Baloo+Bhaina" rel="stylesheet">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	</head>
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-1">	
+				<div class="col-sm-1">
 				</div>
                 <div class="col-sm-10">
                 	<h1 class="title text-center">Address Book</h1>
@@ -26,16 +41,16 @@
 	                    <ul class="nav nav-tabs" role="tablist">
 	                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
 	                        <li role="presentation"><a href="#add" aria-controls="add" role="tab" data-toggle="tab">Add</a></li>
-	                        <li role="presentation"><a href="#update" aria-controls="update" role="tab" data-toggle="tab">Update</a></li>
 	                        <li role="presentation"><a href="#view" aria-controls="view" role="tab" data-toggle="tab">View All</a></li>
+	                        <li role="presentation"><a href="#update" aria-controls="update" role="tab" data-toggle="tab">Update</a></li>
 	                        <li role="presentation"><a href="logout/" aria-controls="logout">Logout</a></li>
 	                    </ul>
 	                    <div class="tab-content">
 	                    	<!-- Home -->
-	                        <div role="tabpanel" class="tab-pane active" id="home">	                        	
+	                        <div role="tabpanel" class="tab-pane active" id="home">
 	                        	<div class="container">
 	                        		<div class="row">
-		                        		<div class="col-sm-2"></div>   	
+		                        		<div class="col-sm-2"></div>
 			                        	<div class="col-sm-5">
 			                        		<h4 class="font">Welcome to your address book, <?php echo $_SESSION['First_Name'].' '.$_SESSION['Last_Name']; ?>!</h4>
 			                        		<table class="table borderless">
@@ -61,11 +76,13 @@
 				                        		</tr>
 				                        	</table>
 			                        	</div>
-			                        	<div class="col-sm-2"></div>   	
-			                        	
+			                        	<div class="col-sm-2">
+
+										<?php echo $availableAmount;?>
+										</div>
+
 	                        		</div>
-	                        	</div>	                        	
-	                        		                        	
+	                        	</div>
 	                        </div>
 	                        <!-- Add -->
 	                        <div role="tabpanel" class="tab-pane" id="add">
@@ -86,6 +103,7 @@
 		</div>
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script>
 			$(document).ready(function() {
 				//reset btn
@@ -93,7 +111,8 @@
 					$('#res').text('');
 					$('#updateRes').text('');
 				});
-				//add
+
+				//Add Information
 				$('#addPersonForm').submit(function(){
 					var formData = new FormData($(this)[0]);
 					$.ajax({
@@ -102,15 +121,15 @@
 				        data: formData,
 				        async: true,
 				        success: function (data){
-				            $('#res').html(data);				            
+				            $('#res').html(data);
 				        },
 				        cache: false,
 				        contentType: false,
 				        processData: false
 				    });
-					$(this)[0].reset();			
+					$(this)[0].reset();
 					return false;
-				});  	
+				});
 				//update
 				//get previous data
 				$('#pemail').change(function(){
@@ -134,7 +153,7 @@
 					            $('#updatepermanant').val(permanant);
 					            $('#updatetemporary').val(temporary);
 					        },
-					    });					    
+					    });
 					}
 					return false;
 				});
@@ -147,7 +166,7 @@
 				        data: formData,
 				        async: true,
 				        success: function (data){
-				            $('#updateRes').html(data);				            
+				            $('#updateRes').html(data);
 				        },
 				        cache: false,
 				        contentType: false,
@@ -155,10 +174,10 @@
 				    });
 					$(this)[0].reset();
 					return false;
-				});  	
+				});
 				//delete a person
 				$("button").click(function(event){
-					var id = event.target.id;					
+					var id = event.target.id;
 					if($.isNumeric(id)){
 						if(confirm("Are sure to delete this person?")){
 							$.ajax({
@@ -172,11 +191,47 @@
 									$(objID).hide(500);
 									setTimeout(function(){ $('#deleteRes').text(''); }, 2000);
 						        },
-						    });		
+						    });
 						}
 					}
 					return false;
 				});
+
+				$( function() {
+					var availableAmount = <?php echo $tagStart.$availableAmount.$tagEnd;?>;
+					$( "#amount" ).autocomplete({
+						source: availableAmount
+					});
+				} );
+
+				$( function() {
+					var availableFirstName = <?php echo $tagStart.$availableFirstName.$tagEnd;?>;
+					$( "#fn" ).autocomplete({
+						source: availableFirstName
+					});
+				} );
+
+				$( function() {
+					var availableLastName = <?php echo $tagStart.$availableLastName.$tagEnd;?>;
+					$( "#ln" ).autocomplete({
+						source: availableLastName
+					});
+				} );
+
+				$( function() {
+					var availableSurname = <?php echo $tagStart.$availableSurname.$tagEnd;?>;
+					$( "#surname" ).autocomplete({
+						source: availableSurname
+					});
+				} );
+
+				$( function() {
+					var availableVillageName = <?php echo $tagStart.$availableVillageName.$tagEnd;?>;
+					$( "#village-name" ).autocomplete({
+						source: availableVillageName
+					});
+				} );
+
 			});
 		</script>
 	</body>

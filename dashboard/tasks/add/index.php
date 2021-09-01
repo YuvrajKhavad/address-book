@@ -1,29 +1,35 @@
 <?php
-	include('../../../include/db.php');	
+	include('../../../include/db.php');
+
+	$amount = trim($_POST['amount']);
 	$fn = trim($_POST['fn']);
-	$ln = trim($_POST['ln']);		
-	$name = $fn.' '.$ln;
-	$mobile = trim($_POST['mobile']);		
-	$email = trim($_POST['email']);
-	$permanant = trim($_POST['permanant']);
-	$temporary = trim($_POST['temporary']);
-	if(strlen($fn) > 0 && strlen($ln) > 0 && strlen($mobile) > 0 && strlen($email) > 0 && strlen($permanant) > 0 && strlen($temporary) > 0){
+	$ln = trim($_POST['ln']);
+	$surname = trim($_POST['surname']);
+	$village_name = trim($_POST['village-name']);
+
+	if(strlen($amount) > 0 && strlen($fn) > 0 && strlen($ln) > 0 && strlen($surname) > 0 && strlen($village_name) > 0)
+	{
 		//if person is already added
-		$check = mysqli_query($con, "SELECT * FROM persons WHERE Email='$email' ");
-		if(mysqli_num_rows($check)==1){
+		/*$check = mysqli_query($con, "SELECT * FROM persons WHERE Email='$email' ");
+		if(mysqli_num_rows($check)==1)
+		{
 			echo '<p style="color: #9F6000;font-weight: bold;">This person is already added.</p>';
 		}
-		else{
-			mysqli_query($con, "INSERT INTO persons(Name,Mobile,Email,Permanant_Address,Temporary_Address) VALUES('$name','$mobile','$email','$permanant','$temporary') ");
-			if(mysqli_error($con)==""){
-				echo '<p style="color: #4F8A10;font-weight: bold;">Person Added Successfully!</p>';
+		else
+		{*/
+			mysqli_query($con, "INSERT INTO persons(Amount, First_Name, Last_Name,Surname , 	Village_Name) VALUES('$amount','$fn','$ln','$surname','$village_name') ");
+			if(mysqli_error($con)=="")
+			{
+				echo '<p style="color: #4F8A10;font-weight: bold;">Information Added Successfully!</p>';
 			}
-			else{
+			else
+			{
 				echo '<p style="color: #D8000C;font-weight: bold;">Something Went Wrong, Try Again.</p>';
 			}
-		}	
+		//}
 	}
-	else{
-		echo '<p style="color: #D8000C;font-weight: bold;">Please Fill All The Details.</p>';
-	}					
+	else
+	{
+		echo '<p style="color: #D8000C;font-weight: bold;">Please fill all the details.</p>';
+	}
 ?>
