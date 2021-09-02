@@ -7,19 +7,40 @@
 	$row = mysqli_fetch_array(mysqli_query($con, "SELECT count(*) FROM persons"));
 	$personsCount = $row[0];
 
-	// get all amout
-	$res = mysqli_query($con, "SELECT * FROM persons");
-	$availableAmount = $availableFirstName = $availableLastName = $availableSurname  = $availableVillageName = "";
 	$tagStart = "[";
+	$tagEnd = "]";
+	$availableAmount = $availableFirstName = $availableLastName = $availableSurname  = $availableVillageName = "";
+
+	$res = mysqli_query($con, "SELECT DISTINCT(Amount) FROM persons");
 	while($row = mysqli_fetch_array($res))
 	{
 		$availableAmount .='"'.$row['Amount'].'",';
-		$availableFirstName .='"'.$row['First_Name'].'",';
-		$availableLastName .='"'.$row['Last_Name'].'",';
-		$availableSurname .='"'.$row['Surname'].'",';
-		$availableVillageName .='"'.$row['Village_Name'].'",';
 	}
-	$tagEnd = "]";
+
+	$resFirstName = mysqli_query($con, "SELECT DISTINCT(First_Name) FROM persons");
+	while($rowFirstName = mysqli_fetch_array($resFirstName))
+	{
+		$availableFirstName .='"'.$rowFirstName['First_Name'].'",';
+	}
+
+	$resLastName = mysqli_query($con, "SELECT DISTINCT(Last_Name) FROM persons");
+	while($rowLastName = mysqli_fetch_array($resLastName))
+	{
+		$availableLastName .='"'.$rowLastName['Last_Name'].'",';
+	}
+
+	$resSurname = mysqli_query($con, "SELECT DISTINCT(Surname) FROM persons");
+	while($rowSurname = mysqli_fetch_array($resSurname))
+	{
+		$availableSurname .='"'.$rowSurname['Surname'].'",';
+	}
+
+	$resVillage_Name = mysqli_query($con, "SELECT DISTINCT(Village_Name) FROM persons");
+	while($rowVillage_Name = mysqli_fetch_array($resVillage_Name))
+	{
+		$availableVillageName .='"'.$rowVillage_Name['Village_Name'].'",';
+	}
+
 ?>
 <html>
 	<head>
@@ -42,7 +63,7 @@
 	                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
 	                        <li role="presentation"><a href="#add" aria-controls="add" role="tab" data-toggle="tab">Add</a></li>
 	                        <li role="presentation"><a href="#view" aria-controls="view" role="tab" data-toggle="tab">View All</a></li>
-	                        <li role="presentation"><a href="#update" aria-controls="update" role="tab" data-toggle="tab">Update</a></li>
+	                        <!--li role="presentation"><a href="#update" aria-controls="update" role="tab" data-toggle="tab">Update</a></li-->
 	                        <li role="presentation"><a href="logout/" aria-controls="logout">Logout</a></li>
 	                    </ul>
 	                    <div class="tab-content">
@@ -76,10 +97,7 @@
 				                        		</tr>
 				                        	</table>
 			                        	</div>
-			                        	<div class="col-sm-2">
-
-										<?php echo $availableAmount;?>
-										</div>
+			                        	<div class="col-sm-2"></div>
 
 	                        		</div>
 	                        	</div>
