@@ -6,41 +6,6 @@
 	}
 	$row = mysqli_fetch_array(mysqli_query($con, "SELECT count(*) FROM persons"));
 	$personsCount = $row[0];
-
-	$tagStart = "[";
-	$tagEnd = "]";
-	$availableAmount = $availableFirstName = $availableLastName = $availableSurname  = $availableVillageName = "";
-
-	$res = mysqli_query($con, "SELECT DISTINCT(Amount) FROM persons");
-	while($row = mysqli_fetch_array($res))
-	{
-		$availableAmount .='"'.$row['Amount'].'",';
-	}
-
-	$resFirstName = mysqli_query($con, "SELECT DISTINCT(First_Name) FROM persons");
-	while($rowFirstName = mysqli_fetch_array($resFirstName))
-	{
-		$availableFirstName .='"'.$rowFirstName['First_Name'].'",';
-	}
-
-	$resLastName = mysqli_query($con, "SELECT DISTINCT(Last_Name) FROM persons");
-	while($rowLastName = mysqli_fetch_array($resLastName))
-	{
-		$availableLastName .='"'.$rowLastName['Last_Name'].'",';
-	}
-
-	$resSurname = mysqli_query($con, "SELECT DISTINCT(Surname) FROM persons");
-	while($rowSurname = mysqli_fetch_array($resSurname))
-	{
-		$availableSurname .='"'.$rowSurname['Surname'].'",';
-	}
-
-	$resVillage_Name = mysqli_query($con, "SELECT DISTINCT(Village_Name) FROM persons");
-	while($rowVillage_Name = mysqli_fetch_array($resVillage_Name))
-	{
-		$availableVillageName .='"'.$rowVillage_Name['Village_Name'].'",';
-	}
-
 ?>
 <html>
 	<head>
@@ -123,7 +88,13 @@
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script>
-			$(document).ready(function() {
+			var amount = $("#amount");
+			var fn = $("#fn");
+			var ln = $("#ln");
+			var surname = $("#surname");
+			var village_name = $("#village-name");
+			$(document).ready(function() 
+			{
 				//reset btn
 				$('.btn-danger').click(function(){
 					$('#res').text('');
@@ -215,42 +186,65 @@
 					return false;
 				});
 
-				$( function() {
-					var availableAmount = <?php echo $tagStart.$availableAmount.$tagEnd;?>;
-					$( "#amount" ).autocomplete({
-						source: availableAmount
-					});
-				} );
+				// Search amout
+				amount.keyup(function()
+				{
+					search_ajax_call($(this).val(), amount, 'amount', 'Amount');
+				});
 
-				$( function() {
-					var availableFirstName = <?php echo $tagStart.$availableFirstName.$tagEnd;?>;
-					$( "#fn" ).autocomplete({
-						source: availableFirstName
-					});
-				} );
+				// Search first name
+				fn.keyup(function()
+				{
+					search_ajax_call($(this).val(), fn, 'fn', 'First_Name');
+				});
 
-				$( function() {
-					var availableLastName = <?php echo $tagStart.$availableLastName.$tagEnd;?>;
-					$( "#ln" ).autocomplete({
-						source: availableLastName
-					});
-				} );
+				// Search last name
+				ln.keyup(function()
+				{
+					search_ajax_call($(this).val(), ln, 'ln', 'Last_Name');
+				});
 
-				$( function() {
-					var availableSurname = <?php echo $tagStart.$availableSurname.$tagEnd;?>;
-					$( "#surname" ).autocomplete({
-						source: availableSurname
-					});
-				} );
+				// Search Surname name
+				surname.keyup(function()
+				{
+					search_ajax_call($(this).val(), surname, 'surname', 'Surname');
+				});
 
-				$( function() {
-					var availableVillageName = <?php echo $tagStart.$availableVillageName.$tagEnd;?>;
-					$( "#village-name" ).autocomplete({
-						source: availableVillageName
-					});
-				} );
+				// Search Village_Name name
+				village_name.keyup(function()
+				{
+					search_ajax_call($(this).val(), village_name, 'village-name', 'Village_Name');
+				});
 
+				//data:'keyword =' + keyword + '&column =' + column_name + '&obj ='+object+ '&id ='+id,
+
+				function search_ajax_call(keyword, object, id, column_name)
+				{
+					sid = $("#"+id+"-suggesstion-box");
+					$.ajax({
+						type: "POST",
+						url: "tasks/search/",
+						data:'keyword='+keyword+'&column='+column_name+'&id='+id,
+						beforeSend: function()
+						{
+							object.css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+						},
+						success: function(data)
+						{
+							//alert(data);
+							sid.show();
+							sid.html(data);
+							object.css("background","#FFF");
+						}
+					});
+				}
 			});
+
+			function selectResult(val, id)
+			{
+				$("#"+id).val(val);
+				$("#"+id+"-suggesstion-box").hide();
+			}
 		</script>
 	</body>
 </html>

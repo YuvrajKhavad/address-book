@@ -4,14 +4,13 @@
 		<div class="col-sm-6">
 			<form class="form-vertical" role="form" id="addPersonForm">
 				<p class="text-center" id="res"></p>
-
-
 				<div class="row">
 					<div class="col-sm-4">
 						<label>Amount</label>
 					</div>
 					<div class="form-group col-sm-6">
 			    		<input type="text" class="form-control" name="amount" id="amount" autocomplete="on" />
+						<div id="amount-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
 				</div>
@@ -21,7 +20,8 @@
 						<label>First Name</label>
 					</div>
 					<div class="form-group col-sm-6">
-			    		<input type="text" class="form-control" name="fn" id="fn" autocomplete="on" />
+						<input type="text" class="form-control" name="fn" id="fn" autocomplete="on" />
+						<div id="fn-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
 				</div>
@@ -32,6 +32,7 @@
 					</div>
 					<div class="form-group col-sm-6">
 			    		<input type="text" class="form-control" name="ln" id="ln" autocomplete="off" />
+						<div id="ln-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
 				</div>
@@ -42,6 +43,7 @@
 					</div>
 					<div class="form-group col-sm-6">
 			    		<input type="text" class="form-control" name="surname" id="surname" autocomplete="off" />
+						<div id="surname-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
 				</div>
@@ -52,6 +54,7 @@
 					</div>
 					<div class="form-group col-sm-6">
 			    		<input type="text" class="form-control" name="village-name" id="village-name" autocomplete="off" />
+						<div id="village-name-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
 				</div>
