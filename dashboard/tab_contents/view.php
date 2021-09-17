@@ -1,3 +1,13 @@
+
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+Search
+</a>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
+
 <p class="text-center" id="deleteRes"></p>
 <table class="table table-condensed table-responsive">
 	<thead>
@@ -13,6 +23,7 @@
 	</thead>
 	<tbody>
 		<?php
+			include('../../include/db.php');
 			$res = mysqli_query($con, "SELECT * FROM persons");
 			$count = 1;
 			while($row = mysqli_fetch_array($res))
