@@ -10,7 +10,7 @@
 <html>
 
 <head>
-	<title>Dashboard - Address Book</title>
+	<title>Home - Address Book</title>
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/custom.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
@@ -24,7 +24,7 @@
 			<div class="col-sm-1">
 			</div>
 			<div class="col-sm-10">
-				<h1 class="title text-center">લગ્ન ચાંદલા બુક</h1>
+				<h1 class="title text-center">Address Book</h1>
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist" id = "tab-action">
 						<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
@@ -96,6 +96,7 @@
 		var ln = $("#ln");
 		var surname = $("#surname");
 		var village_name = $("#village-name");
+		var search_by_village = $("#search-village-name");
 		$(document).ready(function () {
 			//reset btn
 			$('.btn-danger').click(function () {
@@ -225,7 +226,12 @@
 				}
 			});
 
-			//data:'keyword =' + keyword + '&column =' + column_name + '&obj ='+object+ '&id ='+id,
+			$(document).on('keyup','#search-village-name',function( e ) {
+				if($(this).val() != "")
+				{
+					search_ajax_call($(this).val(), search_by_village, 'search-village-name', 'Village_Name');
+				}
+			});
 
 			function search_ajax_call(keyword, object, id, column_name) {
 				sid = $("#" + id + "-suggesstion-box");
@@ -244,6 +250,36 @@
 					}
 				});
 			}
+
+			/*$(document).on("click", ".search-button", function(){
+				//table-boday
+			});*/
+
+			$('#SearchForm').on('submit', 'form', function()
+			{
+				//var formData = new FormData($(this)[0]);
+				alert("Hello");
+				//return false;
+				return false;
+			})
+			/*$('#SearchForm22').submit(function () {
+				var formData = new FormData($(this)[0]);
+				alert("Hello");
+				/*$.ajax({
+					url: 'tasks/update/',
+					type: 'POST',
+					data: formData,
+					async: true,
+					success: function (data) {
+						$('#updateRes').html(data);
+					},
+					cache: false,
+					contentType: false,
+					processData: false
+				});
+				$(this)[0].reset();*/
+				/*return false;
+			})*/
 		});
 
 		function selectResult(val, id) {

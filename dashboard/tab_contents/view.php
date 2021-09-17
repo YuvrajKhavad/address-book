@@ -1,13 +1,14 @@
-
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-Search
-</a>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-  </div>
-</div>
-
+<form class="form-vertical" role="form" id="SearchForm">
+	<div class="form-group mb-2">
+		<label for="inputPassword2" class="sr-only">Village Name</label>
+		<input type="text" name = "search-village-name" class="form-control" id="search-village-name" placeholder="Village Name">
+		<div id="search-village-name-suggesstion-box"></div>
+	</div>
+	<div class="form-group mx-sm-3 mb-2">
+		<input type="submit" class="btn btn-primary mb-2 search-button" value="Find" id="addBtn2" />
+		<input type="submit" class="btn btn-success" value="Add" id="addBtn" />
+	</div>
+</form>
 <p class="text-center" id="deleteRes"></p>
 <table class="table table-condensed table-responsive">
 	<thead>
@@ -21,7 +22,7 @@ Search
 			<th>Actiona</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id="table-boday">
 		<?php
 			include('../../include/db.php');
 			$res = mysqli_query($con, "SELECT * FROM persons");
