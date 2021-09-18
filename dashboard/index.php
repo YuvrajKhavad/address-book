@@ -97,7 +97,9 @@
 		var surname = $("#surname");
 		var village_name = $("#village-name");
 		var search_by_village = $("#search-village-name");
+		var search_by_amout = $("#search-by-amout");
 		$(document).ready(function () {
+
 			//reset btn
 			$('.btn-danger').click(function () {
 				$('#res').text('');
@@ -123,6 +125,7 @@
 				return false;
 			});
 			//update
+
 			//get previous data
 			$('#pemail').change(function () {
 				var pemail = $(this).val();
@@ -149,6 +152,7 @@
 				}
 				return false;
 			});
+
 			//update the data
 			$('#updatePersonForm').submit(function () {
 				var formData = new FormData($(this)[0]);
@@ -233,6 +237,13 @@
 				}
 			});
 
+			$(document).on('keyup','#search-by-amout',function( e ) {
+				if($(this).val() != "")
+				{
+					search_ajax_call($(this).val(), search_by_amout, 'search-by-amout', 'Amount');
+				}
+			});
+
 			function search_ajax_call(keyword, object, id, column_name) {
 				sid = $("#" + id + "-suggesstion-box");
 				$.ajax({
@@ -251,35 +262,24 @@
 				});
 			}
 
-			/*$(document).on("click", ".search-button", function(){
-				//table-boday
-			});*/
-
-			$('#SearchForm').on('submit', 'form', function()
-			{
-				//var formData = new FormData($(this)[0]);
-				alert("Hello");
-				//return false;
-				return false;
-			})
-			/*$('#SearchForm22').submit(function () {
+			$(document).on("submit", "#SearchForm", function (e) {
+				e.preventDefault();
 				var formData = new FormData($(this)[0]);
-				alert("Hello");
-				/*$.ajax({
-					url: 'tasks/update/',
+				$.ajax({
+					url: 'tasks/search/search.php',
 					type: 'POST',
 					data: formData,
 					async: true,
 					success: function (data) {
-						$('#updateRes').html(data);
+						$('#table-boday').html(data);
+						//alert(data);
 					},
 					cache: false,
 					contentType: false,
 					processData: false
 				});
-				$(this)[0].reset();*/
-				/*return false;
-			})*/
+			});
+
 		});
 
 		function selectResult(val, id) {
