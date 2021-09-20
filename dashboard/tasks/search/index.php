@@ -1,6 +1,14 @@
 <?php
 include('../../../include/db.php');
 $column = $_POST["column"];
+if($column == "full")
+{
+
+}
+else
+{
+
+}
 $search_query = mysqli_query($con, "SELECT  DISTINCT($column) FROM persons WHERE $column like '" . $_POST["keyword"] . "%'");
 ?>
 <ul class="search-result">

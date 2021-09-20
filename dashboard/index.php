@@ -98,6 +98,7 @@
 		var village_name = $("#village-name");
 		var search_by_village = $("#search-village-name");
 		var search_by_amout = $("#search-by-amout");
+		var search_by_name = $("#search-by-name");
 		$(document).ready(function () {
 
 			//reset btn
@@ -230,6 +231,7 @@
 				}
 			});
 
+			// Seach by Village name
 			$(document).on('keyup','#search-village-name',function( e ) {
 				if($(this).val() != "")
 				{
@@ -237,10 +239,19 @@
 				}
 			});
 
+			// Seach by Village amount
 			$(document).on('keyup','#search-by-amout',function( e ) {
 				if($(this).val() != "")
 				{
 					search_ajax_call($(this).val(), search_by_amout, 'search-by-amout', 'Amount');
+				}
+			});
+
+			// Seach by Village name
+			$(document).on('keyup','#search-by-name',function( e ) {
+				if($(this).val() != "")
+				{
+					search_ajax_call($(this).val(), search_by_name, 'search-by-name', 'full');
 				}
 			});
 

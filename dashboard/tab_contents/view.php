@@ -5,7 +5,7 @@
 	</div>
 
 	<div class="form-group mb-2">
-		<input type="text" name = "search-by-amout" class="form-control" id="search-by-amout" placeholder="Search By Amout">
+		<input type="text" name = "search-by-amout" class="form-control" id="search-by-amout" placeholder="Search By Amount">
 		<div id="search-by-amout-suggesstion-box"></div>
 	</div>
 
