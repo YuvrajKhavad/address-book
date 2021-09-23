@@ -1,15 +1,14 @@
 <?php
 include('../../../include/db.php');
 $column = $_POST["column"];
-if($column == "full")
+if($column !== "full")
 {
-
+    $search_query = mysqli_query($con, "SELECT DISTINCT($column) FROM persons WHERE $column like '%" . $_POST["keyword"] . "%'");
 }
 else
 {
-
+    $search_query = mysqli_query($con, "SELECT CONCAT(First_Name,' ',Last_Name,' ',Surname ) AS full FROM persons WHERE CONCAT(First_Name,' ',Last_Name,' ',Surname ) like '%" . $_POST["keyword"] . "%'");
 }
-$search_query = mysqli_query($con, "SELECT  DISTINCT($column) FROM persons WHERE $column like '" . $_POST["keyword"] . "%'");
 ?>
 <ul class="search-result">
 <?php

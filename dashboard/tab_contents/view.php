@@ -10,7 +10,7 @@
 	</div>
 
 	<div class="form-group mb-2">
-		<input type="text" name = "search-by-name" class="form-control" id="search-by-name" placeholder="Search By Name">
+		<input type="text" name = "search-by-name" class="form-control" id="search-by-name" placeholder="Search By Full Name">
 		<div id="search-by-name-suggesstion-box"></div>
 	</div>
 
