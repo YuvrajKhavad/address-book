@@ -5,6 +5,30 @@ $search_by_amount = trim($_POST['search-by-amout']);
 $search_by_name = trim($_POST['search-by-name']);
 
 // Main Query
+
+/**Case: 1
+Village
+
+Case: 2
+Amout
+
+Case:3
+Full name
+
+Case: 4
+Village and Amout
+
+Case: 5
+Village and Full name
+
+Case:6
+Amout and Full name
+
+Case 7:
+Village , Amout and full name
+
+Case 8
+Nothing selsect */
 $query = "SELECT * FROM `persons`";
 
 if(!empty($village_name) || !empty($search_by_amount) || !empty($search_by_name))
@@ -16,7 +40,7 @@ if(!empty($village_name))
 {
     $query .= "`Village_Name` = '".$village_name."'";
 
-    if(!empty($search_by_amount) || !empty($search_by_name))
+    if($search_by_amount || $search_by_name)
     {
         $query .= " AND ";
     }
@@ -25,10 +49,10 @@ if(!empty($village_name))
 if(!empty($search_by_amount))
 {
     $query .= "`Amount` = '".$search_by_amount."'";
-    
-    if(!empty($village_name) || !empty($search_by_name))
+
+    if($village_name || $search_by_name)
     {
-       // $query .= " AND ";
+       $query .= " AND ";
     }
 }
 
@@ -38,13 +62,11 @@ if(!empty($search_by_name))
     {
         //$query .= " AND ";
     }
-    $query .= "`First_Name` = '".$search_by_name."'";
+    $query .= " CONCAT(First_Name,' ',Last_Name,' ',Surname ) like '%" . $search_by_name . "%'";
 }
 
 echo $query;
-//$res = mysqli_query($con, "SELECT * FROM persons WHERE  `Village_Name` = ".$village_name);
 $res = mysqli_query($con, $query);
-//echo "SELECT * FROM persons WHERE  `Village_Name` = ".$village_name;
 $count = 1;
 $tr = "";
 $sum = 0;

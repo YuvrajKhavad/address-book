@@ -7,7 +7,7 @@ if($column !== "full")
 }
 else
 {
-    $search_query = mysqli_query($con, "SELECT CONCAT(First_Name,' ',Last_Name,' ',Surname ) AS full FROM persons WHERE CONCAT(First_Name,' ',Last_Name,' ',Surname ) like '%" . $_POST["keyword"] . "%'");
+    $search_query = mysqli_query($con, "SELECT DISTINCT(CONCAT(First_Name,' ',Last_Name,' ',Surname )) AS full FROM persons WHERE CONCAT(First_Name,' ',Last_Name,' ',Surname ) like '%" . $_POST["keyword"] . "%'");
 }
 ?>
 <ul class="search-result">
