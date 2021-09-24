@@ -1,13 +1,13 @@
 <?php
 include('../../../include/db.php');
 $village_name = trim($_POST['search-village-name']);
-$search_by_amout = trim($_POST['search-by-amout']);
+$search_by_amount = trim($_POST['search-by-amout']);
 $search_by_name = trim($_POST['search-by-name']);
 
 // Main Query
 $query = "SELECT * FROM `persons`";
 
-if(!empty($village_name) || !empty($search_by_amout) || !empty($search_by_name))
+if(!empty($village_name) || !empty($search_by_amount) || !empty($search_by_name))
 {
     $query .= " WHERE";
 }
@@ -15,29 +15,31 @@ if(!empty($village_name) || !empty($search_by_amout) || !empty($search_by_name))
 if(!empty($village_name))
 {
     $query .= "`Village_Name` = '".$village_name."'";
-    if(!empty($search_by_amout) || !empty($search_by_name))
+
+    if(!empty($search_by_amount) || !empty($search_by_name))
     {
-        //$query .= " AND ";
+        $query .= " AND ";
     }
 }
 
-if(!empty($search_by_amout))
+if(!empty($search_by_amount))
 {
+    $query .= "`Amount` = '".$search_by_amount."'";
+    
     if(!empty($village_name) || !empty($search_by_name))
     {
        // $query .= " AND ";
     }
-    $query .= "`Amount` = '".$search_by_amout."'";
 }
 
-/*if(!empty($search_by_name))
+if(!empty($search_by_name))
 {
-    if(!empty($village_name) || !empty($search_by_amout))
+    if(!empty($village_name) || !empty($search_by_amount))
     {
         //$query .= " AND ";
     }
     $query .= "`First_Name` = '".$search_by_name."'";
-}*/
+}
 
 echo $query;
 //$res = mysqli_query($con, "SELECT * FROM persons WHERE  `Village_Name` = ".$village_name);
