@@ -14,16 +14,16 @@ if(!empty($village_name) || !empty($search_by_amout)  || !empty($search_by_name)
 
 if(!empty($village_name))
 {
-    if(!empty($search_by_amout) || !empty($search_by_name))
-    {
-        //$query .= " AND ";
-    }
     $query .= "`Village_Name` = '".$village_name."'";
+    if(!empty($search_by_amout))
+    {
+        $query .= " AND ";
+    }
 }
 
 if(!empty($search_by_amout))
 {
-    if(!empty($village_name) || !empty($search_by_name))
+    if(!empty($village_name))
     {
        // $query .= " AND ";
     }
@@ -32,7 +32,7 @@ if(!empty($search_by_amout))
 
 if(!empty($search_by_name))
 {
-    if(!empty($village_name) || !empty($search_by_amout))
+    if(!empty($village_name))
     {
         //$query .= " AND ";
     }
