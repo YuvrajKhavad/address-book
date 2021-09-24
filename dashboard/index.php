@@ -172,6 +172,7 @@
 				$(this)[0].reset();
 				return false;
 			});
+
 			//delete a person
 			$(document).on("click", "button", function(){
 				var id = event.target.id;
