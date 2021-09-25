@@ -21,16 +21,13 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-1">
-			</div>
-			<div class="col-sm-10">
-				<h1 class="title text-center">Address Book</h1>
+			<div class="col-sm-12">
+				<h1 class="title text-center">Marriage Shaguna Records</h1>
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist" id = "tab-action">
 						<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+						<li role="presentation"><a href="#view" aria-controls="view" role="tab" data-toggle="tab">View</a></li>
 						<li role="presentation"><a href="#add" aria-controls="add" role="tab" data-toggle="tab">Add</a> </li>
-						<li role="presentation"><a href="#view" aria-controls="view" role="tab" data-toggle="tab">View All</a></li>
-						<!--li role="presentation"><a href="#update" aria-controls="update" role="tab" data-toggle="tab">Update</a></li-->
 						<li role="presentation"><a href="logout/" aria-controls="logout">Logout</a></li>
 					</ul>
 					<div class="tab-content">
@@ -71,17 +68,13 @@
 								</div>
 							</div>
 						</div>
-						<!-- Add -->
-						<div role="tabpanel" class="tab-pane" id="add">
-							<?php include('tab_contents/add.php'); ?>
-						</div>
-						<!-- Update -->
-						<div role="tabpanel" class="tab-pane" id="update">
-							<?php include('tab_contents/update.php'); ?>
-						</div>
 						<!-- View -->
 						<div role="tabpanel" class="tab-pane" id="view">
 							<?php include('tab_contents/view.php'); ?>
+						</div>
+						<!-- Add -->
+						<div role="tabpanel" class="tab-pane" id="add">
+							<?php include('tab_contents/add.php'); ?>
 						</div>
 					</div>
 				</div>
@@ -304,7 +297,7 @@
 			$(document).prop('title','' + link.currentTarget.innerText + ' - Address Book');
 
 			// call ajax to list all record
-			if(link.currentTarget.innerText == "View All")
+			if(link.currentTarget.innerText == "View")
 			{
 				$.ajax({
 					url: 'tab_contents/view.php',
