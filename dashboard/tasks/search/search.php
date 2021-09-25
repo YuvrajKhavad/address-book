@@ -50,7 +50,7 @@ if(!empty($search_by_amount))
 {
     $query .= "`Amount` = '".$search_by_amount."'";
 
-    if($village_name || $search_by_name)
+    if( $search_by_name)
     {
        $query .= " AND ";
     }
