@@ -34,7 +34,7 @@
 	<tbody id="table-boday">
 		<?php
 			include('../../include/db.php');
-			$res = mysqli_query($con, "SELECT * FROM persons");
+			$res = mysqli_query($con, "SELECT * FROM persons, location WHERE location.ID = persons.Village_Name");
 			$count = 1;
 			$tr = "";
 			$sum = 0;
@@ -47,7 +47,7 @@
 							<td>'.$row['Last_Name'].'</td>
 							<td>'.$row['Surname'].'</td>
 							<td>'.$row['Village_Name'].'</td>
-							<td><button class="btn btn-danger" id="'.$row['ID'].'">Delete </button> <button class="btn btn-danger" id="'.$row['ID'].'">Edit</button></td>
+							<td><button class="btn btn-danger" id="'.$row['ID'].'">Delete </button></td>
 					  </tr>';
 				$count++;
 

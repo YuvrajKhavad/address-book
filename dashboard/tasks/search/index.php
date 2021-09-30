@@ -3,7 +3,8 @@ include('../../../include/db.php');
 $column = $_POST["column"];
 if($column !== "full")
 {
-    $search_query = mysqli_query($con, "SELECT DISTINCT($column) FROM persons WHERE $column like '%" . $_POST["keyword"] . "%'");
+    $table = ($column == "Village_Name")?'location ':'persons';
+    $search_query = mysqli_query($con, "SELECT DISTINCT($column) FROM $table WHERE $column like '%" . $_POST["keyword"] . "%'");
 }
 else
 {
@@ -15,7 +16,7 @@ else
 while($row_search = mysqli_fetch_array($search_query))
 {
 ?>
-    <li onClick="selectResult('<?php echo $row_search[$column]; ?>', '<?php echo $_POST["id"]; ?>');"><?php echo $row_search[$column]; ?></li>
+    <li onClick="selectResult('<?php echo $row_search[$column]; ?>', '<?php echo $_POST["id"]; ?>', '<?php echo $row_search['ID']; ?>');"><?php echo $row_search[$column]; ?></li>
 <?php
 }
 ?>

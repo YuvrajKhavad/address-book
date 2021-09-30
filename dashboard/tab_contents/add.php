@@ -54,6 +54,7 @@
 					</div>
 					<div class="form-group col-sm-6">
 			    		<input type="text" class="form-control" name="village-name" id="village-name" autocomplete="off" />
+						<input type="hidden" class="form-control" name="village-id" id="village-id"/>
 						<div id="village-name-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
