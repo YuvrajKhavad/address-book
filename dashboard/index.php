@@ -288,7 +288,7 @@
 		});
 
 		function selectResult(val, id, f_id) {
-			alert(f_id);
+			//alert(f_id);
 			$("#" + id).val(val);
 			$("#" + id + "-suggesstion-box").hide();
 			$("#village-id").val(f_id);
