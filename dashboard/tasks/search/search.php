@@ -5,8 +5,11 @@ $search_by_amount = trim($_POST['search-by-amout']);
 $search_by_name = trim($_POST['search-by-name']);
 
 // Main Query
+//			$res = mysqli_query($con, "SELECT * FROM persons, location WHERE location.ID = persons.Village_Name");
 $query = "SELECT * FROM `persons`";
+//$query = "SELECT * FROM `persons`, `location`";
 
+//$query .= " WHERE";
 if(!empty($village_name) || !empty($search_by_amount) || !empty($search_by_name))
 {
     $query .= " WHERE";
@@ -36,6 +39,8 @@ if(!empty($search_by_name))
 {
     $query .= " CONCAT(First_Name,' ',Last_Name,' ',Surname ) like '%" . $search_by_name . "%'";
 }
+
+//$query .= " AND location.ID = persons.Village_Name";
 
 $res = mysqli_query($con, $query);
 $count = 1;
