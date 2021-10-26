@@ -4,7 +4,7 @@ $column = $_POST["column"];
 if($column !== "full")
 {
     $table = ($column == "Village_Name")?'location ':'persons';
-    $search_query = mysqli_query($con, "SELECT DISTINCT($column) , `ID` FROM $table WHERE $column like '%" . $_POST["keyword"] . "%'");
+    $search_query = mysqli_query($con, "SELECT DISTINCT($column) FROM $table WHERE $column like '%" . $_POST["keyword"] . "%'");
 }
 else
 {

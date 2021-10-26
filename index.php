@@ -7,7 +7,7 @@
 <html>
 
 <head>
-	<title>Address Book</title>
+	<title>Marriage Shaguna Records</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<link href="https://fonts.googleapis.com/css?family=Baloo+Bhaina" rel="stylesheet">
@@ -19,10 +19,10 @@
 			<div class="col-sm-3">
 			</div>
 			<div class="col-sm-6 text-center">
-				<h1 class="title">Address Book</h1>
+				<h1 class="title">Marriage Shaguna Records</h1>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h1 class="panel-title">Welcome To Address Book</h1>
+						<h1 class="panel-title">Welcome To Marriage Shaguna Records</h1>
 					</div>
 					<div class="panel-body">
 						<div class="conatiner">

@@ -10,7 +10,7 @@
 <html>
 
 <head>
-	<title>Home - Address Book</title>
+	<title>Home - Marriage Shaguna Records</title>
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/custom.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
@@ -37,7 +37,7 @@
 								<div class="row">
 									<div class="col-sm-2"></div>
 									<div class="col-sm-5">
-										<h4 class="font">Welcome to your address book,
+										<h4 class="font">Welcome to your Marriage Shaguna Records,
 											<?php echo $_SESSION['First_Name'].' '.$_SESSION['Last_Name']; ?>!</h4>
 										<table class="table borderless">
 											<tr>
@@ -57,7 +57,7 @@
 												<td><?php echo $_SESSION['Last_Login']; ?></td>
 											</tr>
 											<tr>
-												<td>Persons in Address Book</td>
+												<td>Persons in Marriage Shaguna Records</td>
 												<td>:</td>
 												<td id = "total-entry"><?php echo $personsCount; ?></td>
 											</tr>
@@ -296,7 +296,7 @@
 
 		$('#tab-action a').click(function (link) {
 			// Update title based on tab
-			$(document).prop('title','' + link.currentTarget.innerText + ' - Address Book');
+			$(document).prop('title','' + link.currentTarget.innerText + ' - Marriage Shaguna Records');
 
 			// call ajax to list all record
 			if(link.currentTarget.innerText == "View")
