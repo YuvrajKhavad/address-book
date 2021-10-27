@@ -4,7 +4,14 @@ $column = $_POST["column"];
 if($column !== "full")
 {
     $table = ($column == "Village_Name")?'location ':'persons';
-    $search_query = mysqli_query($con, "SELECT DISTINCT($column) FROM $table WHERE $column like '%" . $_POST["keyword"] . "%'");
+    if($column == "Village_Name")
+    {
+        $search_query = mysqli_query($con, "SELECT `ID`, $column FROM $table WHERE $column like '%" . $_POST["keyword"] . "%'");
+    }
+    else
+    {
+        $search_query = mysqli_query($con, "SELECT DISTINCT($column) FROM $table WHERE $column like '%" . $_POST["keyword"] . "%'");
+    }
 }
 else
 {
@@ -15,8 +22,9 @@ else
 <?php
 while($row_search = mysqli_fetch_array($search_query))
 {
+    $id = (isset($row_search['ID']))?$row_search['ID']:'';
 ?>
-    <li onClick="selectResult('<?php echo $row_search[$column]; ?>', '<?php echo $_POST["id"]; ?>', <?php echo $row_search['ID']; ?>);"><?php echo $row_search[$column]; ?></li>
+    <li onClick="selectResult('<?php echo $row_search[$column]; ?>', '<?php echo $_POST["id"]; ?>', <?php echo $id; ?>);"><?php echo $row_search[$column]; ?></li>
 <?php
 }
 ?>
