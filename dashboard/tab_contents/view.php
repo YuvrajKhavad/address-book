@@ -1,6 +1,7 @@
 <form class="form-vertical" role="form" id="SearchForm">
 	<div class="form-group mb-2">
 		<input type="text" name = "search-village-name" class="form-control" id="search-village-name" placeholder="Search Village Name">
+		<input type="hidden" class="form-control" name="village-id" id="village-id"/>
 		<div id="search-village-name-suggesstion-box"></div>
 	</div>
 

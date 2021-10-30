@@ -5,9 +5,9 @@ $search_by_amount = trim($_POST['search-by-amout']);
 $search_by_name = trim($_POST['search-by-name']);
 
 // Main Query
-//			$res = mysqli_query($con, "SELECT * FROM persons, location WHERE location.ID = persons.Village_Name");
-$query = "SELECT * FROM `persons`";
-//$query = "SELECT * FROM `persons`, `location`";
+//$res = mysqli_query($con, "SELECT * FROM persons, location WHERE location.ID = persons.Village_Name");
+//$query = "SELECT * FROM `persons`";
+$query = "SELECT * FROM persons, location WHERE location.ID = persons.Village_Name";
 
 //$query .= " WHERE";
 if(!empty($village_name) || !empty($search_by_amount) || !empty($search_by_name))
@@ -55,7 +55,7 @@ while($row = mysqli_fetch_array($res))
                 <td>'.$row['Last_Name'].'</td>
                 <td>'.$row['Surname'].'</td>
                 <td>'.$row['Village_Name'].'</td>
-                <td><button class="btn btn-danger" id="'.$row['ID'].'">Remove</button></td>
+                <td><button class="btn btn-danger" id="'.$row['ID'].'">Delete</button></td>
             </tr>';
     $count++;
 

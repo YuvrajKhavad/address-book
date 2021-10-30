@@ -220,6 +220,7 @@
 
 			// Search Village_Name name
 			village_name.keyup(function () {
+				$("#village-id").val("");
 				if($(this).val() != ""){
 					search_ajax_call($(this).val(), village_name, 'village-name', 'Village_Name');
 				}
@@ -227,6 +228,8 @@
 
 			// Seach by Village name
 			$(document).on('keyup','#search-village-name',function( e ) {
+				$("#village-id").val("");
+				//alert("fgfg");
 				if($(this).val() != "")
 				{
 					search_ajax_call($(this).val(), search_by_village, 'search-village-name', 'Village_Name');
@@ -285,13 +288,21 @@
 				});
 			});
 
+			$( "#target" ).keyup(function() {
+				alert( "Handler for .keyup() called." );
+			});
+
 		});
 
 		function selectResult(val, id, f_id) {
+			//alert(id);
 			//alert(f_id);
 			$("#" + id).val(val);
 			$("#" + id + "-suggesstion-box").hide();
-			$("#village-id").val(f_id);
+			if(id == "village-name" || id == "search-village-name")
+			{
+				$("#village-id").val(f_id);
+			}
 		}
 
 		$('#tab-action a').click(function (link) {
