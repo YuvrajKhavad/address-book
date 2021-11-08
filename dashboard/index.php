@@ -299,9 +299,16 @@
 			//alert(f_id);
 			$("#" + id).val(val);
 			$("#" + id + "-suggesstion-box").hide();
-			if(id == "village-name" || id == "search-village-name")
+			if(id == "village-name")
 			{
+				//alert(f_id);
 				$("#village-id").val(f_id);
+			}
+
+			if(id == "search-village-name")
+			{
+				//alert(f_id);
+				$("#search-village-id").val(f_id);
 			}
 		}
 
