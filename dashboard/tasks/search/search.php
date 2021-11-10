@@ -1,7 +1,7 @@
 <?php
 include('../../../include/db.php');
 $village_name = trim($_POST['search-village-name']);
-$village_id = trim($_POST['village-id']);
+$village_id = trim($_POST['search-village-id']);
 $search_by_amount = trim($_POST['search-by-amout']);
 $search_by_name = trim($_POST['search-by-name']);
 
