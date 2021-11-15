@@ -16,6 +16,14 @@
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<link href="https://fonts.googleapis.com/css?family=Baloo+Bhaina" rel="stylesheet">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+	<style>
+		.ui-autocomplete-loading {
+			background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+		}
+	</style>
 </head>
 
 <body>
@@ -75,6 +83,18 @@
 						<!-- Add -->
 						<div role="tabpanel" class="tab-pane" id="add">
 							<?php include('tab_contents/add.php'); ?>
+
+							<div class="ui-widget">
+							<label for="birds">Birds: </label>
+							<input id="birds">
+							</div>
+							
+							<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+							Result:
+							<div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+							</div>
+
+
 						</div>
 					</div>
 				</div>
@@ -83,6 +103,7 @@
 	</div>
 	<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 	<script>
 		var amount = $("#amount");
 		var fn = $("#fn");
@@ -93,6 +114,18 @@
 		var search_by_amout = $("#search-by-amout");
 		var search_by_name = $("#search-by-name");
 		$(document).ready(function () {
+
+			$( "#birds" ).autocomplete(
+			{
+				source: "tasks/search/index.php",
+				//minLength: 2,
+				select: function( event, ui )
+				{
+					alert(ui.item.value);
+					alert(event);
+					log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+				}
+			});
 
 			//reset btn
 			$('.btn-danger').click(function () {
