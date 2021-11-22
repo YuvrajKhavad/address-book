@@ -96,18 +96,6 @@
 		var search_by_name = $("#search-by-name");
 		$(document).ready(function () {
 
-			$( "#birds" ).autocomplete(
-			{
-				source: "tasks/search/index.php",
-				//minLength: 2,
-				select: function( event, ui )
-				{
-					alert(ui.item.value);
-					alert(event);
-					log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-				}
-			});
-
 			//reset btn
 			$('.btn-danger').click(function () {
 				$('#res').text('');
@@ -217,9 +205,19 @@
 					search_ajax_call($(this).val(), fn, 'fn', 'First_Name');
 				}
 			});
+			fn.focus(function () {
+				if($(this).val() != ""){
+					search_ajax_call($(this).val(), fn, 'fn', 'First_Name');
+				}
+			});
 
 			// Search last name
 			ln.keyup(function () {
+				if($(this).val() != ""){
+					search_ajax_call($(this).val(), ln, 'ln', 'Last_Name');
+				}
+			});
+			ln.focus(function () {
 				if($(this).val() != ""){
 					search_ajax_call($(this).val(), ln, 'ln', 'Last_Name');
 				}
@@ -231,9 +229,20 @@
 					search_ajax_call($(this).val(), surname, 'surname', 'Surname');
 				}
 			});
+			surname.focus(function () {
+				if($(this).val() != ""){
+					search_ajax_call($(this).val(), surname, 'surname', 'Surname');
+				}
+			});
 
 			// Search Village_Name name
 			village_name.keyup(function () {
+				$("#village-id").val("");
+				if($(this).val() != ""){
+					search_ajax_call($(this).val(), village_name, 'village-name', 'Village_Name');
+				}
+			});
+			village_name.focus(function () {
 				$("#village-id").val("");
 				if($(this).val() != ""){
 					search_ajax_call($(this).val(), village_name, 'village-name', 'Village_Name');
