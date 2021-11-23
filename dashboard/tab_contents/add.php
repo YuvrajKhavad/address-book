@@ -9,7 +9,7 @@
 						<label>Amount</label>
 					</div>
 					<div class="form-group col-sm-6">
-			    		<input type="text" class="form-control" name="amount" id="amount" autocomplete="on" />
+			    		<input type="text" class="form-control" name="amount" id="amount"  value = "101" autocomplete="on" />
 						<div id="amount-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
