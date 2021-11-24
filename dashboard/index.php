@@ -249,6 +249,13 @@
 				}
 			});
 
+			village_name.on('input',function() {
+				$("#village-id").val("");
+				if($(this).val() != ""){
+					search_ajax_call($(this).val(), village_name, 'village-name', 'Village_Name');
+				}
+			});
+
 			// Seach by Village name
 			$(document).on('keyup','#search-village-name',function( e ) {
 				$("#village-id").val("");
