@@ -28,7 +28,8 @@
 					<ul class="nav nav-tabs" role="tablist" id = "tab-action">
 						<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
 						<li role="presentation"><a href="#view" aria-controls="view" role="tab" data-toggle="tab">View</a></li>
-						<li role="presentation"><a href="#add" aria-controls="add" role="tab" data-toggle="tab">Add</a> </li>
+						<li role="presentation"><a href="#add" aria-controls="add" role="tab" data-toggle="tab">Add</a></li>
+						<li role="presentation"><a href="#villages" aria-controls="villages" role="tab" data-toggle="tab">Villages</a> </li>
 						<li role="presentation"><a href="logout/" aria-controls="logout">Logout</a></li>
 					</ul>
 					<div class="tab-content">
@@ -69,13 +70,20 @@
 								</div>
 							</div>
 						</div>
+
 						<!-- View -->
 						<div role="tabpanel" class="tab-pane" id="view">
 							<?php include('tab_contents/view.php'); ?>
 						</div>
+
 						<!-- Add -->
 						<div role="tabpanel" class="tab-pane" id="add">
 							<?php include('tab_contents/add.php'); ?>
+						</div>
+
+						<!-- View -->
+						<div role="tabpanel" class="tab-pane" id="villages">
+							<?php include('tab_contents/villages.php'); ?>
 						</div>
 					</div>
 				</div>
