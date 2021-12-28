@@ -50,14 +50,6 @@
 
 				//$sum += (int)$row['Amount'];
 			}
-
-			$tr .= '<tr id="total-amout">
-						<td><b>Total</b></td>
-						<td><b>sdfdsf</b></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>';
 			echo $tr;
 		?>
 	</tbody>
