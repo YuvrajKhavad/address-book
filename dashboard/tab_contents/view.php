@@ -35,20 +35,47 @@
 	<tbody id="table-boday">
 		<?php
 			include('../../include/db.php');
-			$res = mysqli_query($con, "SELECT * FROM persons, location WHERE location.ID = persons.Village_Name");
+			//$res = mysqli_query($con, "SELECT * FROM persons, location WHERE location.ID = persons.Village_Name");
+			$res = mysqli_query($con, "SELECT persons.ID as person_ID ,persons.Amount,persons.First_Name,persons.Last_Name,persons.Surname,location.Village_Name FROM persons INNER JOIN location ON persons.Village_Name = location.ID ORDER BY persons.ID");
+			//$res = mysqli_query($con, "SELECT Amount FROM persons");
+			//print_r($res);
 			$count = 1;
 			$tr = "";
 			$sum = 0;
 			while($row = mysqli_fetch_array($res))
 			{
-				$tr .= '<tr id="'.$row['ID'].'">
+				$tr .= '<tr id="'.$row['person_ID'].'">
 							<td>'.$count.'</td>
-							<td>'.$row['Amount'].'</td>
-							<td>'.$row['First_Name'].'</td>
-							<td>'.$row['Last_Name'].'</td>
-							<td>'.$row['Surname'].'</td>
-							<td>'.$row['Village_Name'].'</td>
-							<td><button class="btn btn-danger" id="'.$row['ID'].'">Delete </button></td>
+							
+							<td>
+								<label class="person" id="amount">'.$row['Amount'].'</label>
+								<input type="text" name="amount" id="amount" class="form-control" style="display:none" value="'.$row["Amount"].'"/>
+							</td>
+
+							<td>
+								<label class="person" id="fn">'.$row['First_Name'].'</label>
+								<input type="text" name="fn" id="fn" class="form-control" style="display:none" value="'.$row["First_Name"].'"/>
+							</td>
+
+							<td>
+								<label class="person" id="ln">'.$row['Last_Name'].'</label>
+								<input type="text" name="ln" id="ln" class="form-control" style="display:none" value="'.$row["Last_Name"].'"/>
+							</td>
+
+							<td>
+								<label class="person" id="surname">'.$row['Surname'].'</label>
+								<input type="text" name="surname" id="surname" class="form-control" style="display:none" value="'.$row["Surname"].'"/>
+							</td>
+
+							<td>
+								<label class="person" id="village-name">'.$row['Village_Name'].'</label>
+								<input type="text" class="form-control" name="village-name" id="village-person-name" data-id="'.$row['person_ID'].'" data-person="village-person-name-'.$row['person_ID'].'" style="display:none" value="'.$row["Village_Name"].'" autocomplete="off">
+								<input type="hidden" class="form-control" name="village-name-id" id="village-person-name-'.$row['person_ID'].'">
+								<div id="village-person-name-'.$row['person_ID'].'-suggesstion-box"></div>
+							</td>
+
+							<td><button class="btn btn-success edit" id="'.$row['person_ID'].'">Edit</button></td>
+							<td><button class="btn btn-danger delete" id="'.$row['person_ID'].'">Delete </button></td>
 					  </tr>';
 				$count++;
 

@@ -1,5 +1,5 @@
 <?php
-	$con = mysqli_connect("localhost","root","");
+	$con = mysqli_connect("127.0.0.1","root","");
 	if($con==NULL){
 		echo "Error establishing database connection.";
 	}

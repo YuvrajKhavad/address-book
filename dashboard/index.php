@@ -169,14 +169,14 @@
 			});
 
 			//delete a person
-			$(document).on("click", "button", function(){
+			$(document).on("click", ".delete", function(){
 				var id = event.target.id;
 				if ($.isNumeric(id)) {
 					if (confirm("Are sure to delete this person?")) {
 						$.ajax({
 							url: 'tasks/delete/',
 							type: 'POST',
-							data: 'id=' + id,
+							data: 'id=' +	 id,
 							async: false,
 							success: function (data) {
 								var objID = '#' + id;
@@ -191,6 +191,68 @@
 				}
 				return false;
 			});
+
+			//update a person 
+			$(document).on("click",'.edit',function(){
+				var id = event.target.id;
+				$("#"+id+" .person").css("display","none");
+				$("#"+id+" input").css("display","block");
+				$(this).attr("Class","btn btn-primary update").html("Update");
+			});
+
+			$(document).on("click",".update",function(){
+				var id = event.target.id;
+				var amount = $("#"+id+" input[name='amount']").val();
+				var firstname = $("#"+id+" input[name='fn']").val();
+				var Lastname = $("#"+id+" input[name='ln']").val();
+				var surname = $("#"+id+" input[name='surname']").val();
+				var villagename = $("#"+id+" input[name='village-name']").val();
+				var villageid = $("#"+id+" input[name='village-name-id']").val();
+				 $.ajax({
+				 	url: 'tasks/update/',
+				 	type: 'POST',
+				 	data: {	
+						id:id,
+						amount:amount,
+						firstname:firstname,
+						Lastname:Lastname,
+						surname:surname,
+						villagename:villagename,
+						villageid:villageid
+					 },
+				 	// async: true,
+				 	success: function (data) {
+						$("#"+id+" .person").css("display","block");
+						$("#"+id+" input").css("display","none");
+						$("#"+id+" label[id='amount']").html(amount);
+				 		$("#"+id+" label[id='fn']").html(firstname);
+						$("#"+id+" label[id='ln']").html(Lastname);
+						$("#"+id+" label[id='surname']").html(surname);
+						$("#"+id+" label[id='village-name']").html(villagename);
+						$(".update[id="+id+"]").attr("Class","btn btn-success edit").html("Edit");
+				 	},
+				 	// cache: false,
+				 	// contentType: false,
+				 	// processData: false
+				 });
+			})
+
+
+			$(document).on('keyup','#village-person-name',function( e ) {
+				$("#village-id").val("");
+				var person_id = $(this).attr("data-id");
+				//alert("fgfg");
+				if($(this).val() != "")
+				{
+					search_ajax_call($(this).val(), search_by_village, 'village-person-name-'+person_id, 'Village_Name');
+				}
+			});
+
+
+
+
+
+			
 
 			// Search amout
 			amount.keyup(function () {
@@ -284,6 +346,7 @@
 
 			function search_ajax_call(keyword, object, id, column_name) {
 				sid = $("#" + id + "-suggesstion-box");
+				//vid = $("#village-person-name-suggesstion-box");
 				$.ajax({
 					type: "POST",
 					url: "tasks/search/",
@@ -325,7 +388,6 @@
 		});
 
 		function selectResult(val, id, f_id) {
-			//alert(id);
 			//alert(f_id);
 			$("#" + id).val(val);
 			$("#" + id + "-suggesstion-box").hide();
@@ -333,6 +395,11 @@
 			{
 				//alert(f_id);
 				$("#village-id").val(f_id);
+			}
+			else
+			{
+				$("#" + id).val(f_id);
+				$("#village-person-name[data-person="+id+"]").val(val);
 			}
 
 			if(id == "search-village-name")
