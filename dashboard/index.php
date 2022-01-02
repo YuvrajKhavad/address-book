@@ -245,7 +245,6 @@
 				 });
 			})
 
-
 			$(document).on('keyup','#village-person-name',function( e ) {
 				$("#village-id").val("");
 				var person_id = $(this).attr("data-id");
@@ -255,12 +254,6 @@
 					search_ajax_call($(this).val(), search_by_village, 'village-person-name-'+person_id, 'Village_Name');
 				}
 			});
-
-
-
-
-
-			
 
 			// Search amout
 			amount.keyup(function () {

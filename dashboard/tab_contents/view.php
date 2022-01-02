@@ -35,10 +35,7 @@
 	<tbody id="table-boday">
 		<?php
 			include('../../include/db.php');
-			//$res = mysqli_query($con, "SELECT * FROM persons, location WHERE location.ID = persons.Village_Name");
 			$res = mysqli_query($con, "SELECT persons.ID as person_ID ,persons.Amount,persons.First_Name,persons.Last_Name,persons.Surname,location.Village_Name FROM persons INNER JOIN location ON persons.Village_Name = location.ID ORDER BY persons.ID");
-			//$res = mysqli_query($con, "SELECT Amount FROM persons");
-			//print_r($res);
 			$count = 1;
 			$tr = "";
 			$sum = 0;
@@ -46,7 +43,7 @@
 			{
 				$tr .= '<tr id="'.$row['person_ID'].'">
 							<td>'.$count.'</td>
-							
+
 							<td>
 								<label class="person" id="amount">'.$row['Amount'].'</label>
 								<input type="text" name="amount" id="amount" class="form-control" style="display:none" value="'.$row["Amount"].'"/>
