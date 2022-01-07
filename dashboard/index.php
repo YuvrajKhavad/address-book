@@ -246,7 +246,6 @@
 				 });
 			})
 
-
 			$(document).on('keyup','#village-person-name',function( e ) {
 				$("#village-id").val("");
 				var person_id = $(this).attr("data-id");
