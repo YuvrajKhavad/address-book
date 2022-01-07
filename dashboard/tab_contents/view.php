@@ -54,17 +54,20 @@
 
 							<td>
 								<label class="person" id="fn">'.$row['First_Name'].'</label>
-								<input type="text" name="fn" id="fn" class="form-control" style="display:none" value="'.$row["First_Name"].'"/>
+								<input type="text" name="fn" id="person-fn" class="form-control editfirstname" data-id="'.$row['person_ID'].'" style="display:none" value="'.$row["First_Name"].'"/>
+								<div id="fn-'.$row['person_ID'].'-suggesstion-box"></div>
 							</td>
 
 							<td>
 								<label class="person" id="ln">'.$row['Last_Name'].'</label>
-								<input type="text" name="ln" id="ln" class="form-control" style="display:none" value="'.$row["Last_Name"].'"/>
+								<input type="text" name="ln" id="person-ln" class="form-control editlastname" data-id="'.$row['person_ID'].'" style="display:none" value="'.$row["Last_Name"].'"/>
+								<div id="ln-'.$row['person_ID'].'-suggesstion-box"></div>
 							</td>
 
 							<td>
 								<label class="person" id="surname">'.$row['Surname'].'</label>
-								<input type="text" name="surname" id="surname" class="form-control" style="display:none" value="'.$row["Surname"].'"/>
+								<input type="text" name="surname" id="person-surname" class="form-control editsurname" data-id="'.$row['person_ID'].'" style="display:none" value="'.$row["Surname"].'"/>
+								<div id="surname-'.$row['person_ID'].'-suggesstion-box"></div>
 							</td>
 
 							<td>

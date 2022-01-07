@@ -250,84 +250,23 @@
 			$(document).on('keyup','#village-person-name',function( e ) {
 				$("#village-id").val("");
 				var person_id = $(this).attr("data-id");
-				//alert(person_id);
+				//alert("fgfg");
 				if($(this).val() != "")
 				{
 					search_ajax_call($(this).val(), search_by_village, 'village-person-name-'+person_id, 'Village_Name');
 				}
 			});
 
-			// Edit Time Search first name
-			$(document).on('keyup','#person-fn',function( e ) {
-				var person_fn = $(this).attr("data-id");
-				//alert(person_fn);
-				if($(this).val() != "")
-				{
-					search_ajax_call($(this).val(), fn, person_fn, 'First_Name');
-				}
-			});
-
-			// Edit Time Search last name
-			$(document).on('keyup','#person-ln',function( e ) {
-				var person_ln = $(this).attr("data-id");
-				//alert(person_ln);
-				if($(this).val() != "")
-				{
-					search_ajax_call($(this).val(), ln, person_ln, 'Last_Name');
-				}
-			});
-
-			// Edit Time Search surname name
-			$(document).on('keyup','#person-surname',function( e ) {
-				var person_surname = $(this).attr("data-id");
-				//alert(person_surname);
-				if($(this).val() != "")
-				{
-					search_ajax_call($(this).val(), surname, person_surname, 'Surname');
-				}
-			});
-
 			// Add Time Search village name
 			$(document).on('keyup','#village-name',function( e ) {
 				$("#village-id").val("");
-				var village_name = $(this).val();
-				//alert(village_name);
-				if($(this).val() != "")
-				{
-					search_ajax_call($(this).val(), search_by_village, village_name, 'Village_Name');
-				}
+				var v = $(this).val();
+				alert(v);
+				
 			});
 
-			// Add Time Search Surname
-			$(document).on('keyup','#surname',function( e ) {
-				$("#surname").val("");
-				var addsurname = $(this).val();
-				//alert(addsurname);
-				if($(this).val() != "")
-				{
-					search_ajax_call($(this).val(), surname, addsurname, 'Surname');
-				}
-			});
-			// Add Time Search first name
-			$(document).on('keyup','#fn',function( e ) {
-				$("#fn").val("");
-				var addfn = $(this).val();
-				//alert(addln);
-				if($(this).val() != "")
-				{
-					search_ajax_call($(this).val(), fn, addfn, 'First_Name');
-				}
-			});
-			// Add Time Search last name
-			$(document).on('keyup','#ln',function( e ) {
-				$("#ln").val("");
-				var addln = $(this).val();
-				//alert(addln);
-				if($(this).val() != "")
-				{
-					search_ajax_call($(this).val(), ln, addln, 'Last_Name');
-				}
-			});
+
+
 			
 
 			// Search amout
@@ -421,19 +360,8 @@
 			});
 
 			function search_ajax_call(keyword, object, id, column_name) {
-				//alert(object); 
-				//alert(column_name);
-				//alert(id);
 				sid = $("#" + id + "-suggesstion-box");
 				//vid = $("#village-person-name-suggesstion-box");
-				vid = $("#village-name-suggesstion-box");
-				fnid = $("#fn-suggesstion-box");
-				lnid = $("#ln-suggesstion-box");
-				surid = $("#surname-suggesstion-box");
-				editfnid = $("#fn-" + id + "-suggesstion-box");
-				editlnid = $("#ln-" + id + "-suggesstion-box");
-				editsurid = $("#surname-" + id + "-suggesstion-box");
-				//alert(editsurid);
 				$.ajax({
 					type: "POST",
 					url: "tasks/search/",
@@ -443,26 +371,8 @@
 					},
 					success: function (data) {
 						//alert(data);
-						if(column_name == 'First_Name') {
-							fnid.show(); fnid.html(data);
-							editfnid.show(); editfnid.html(data);
-						} else if(column_name == 'Last_Name') {
-							lnid.show(); lnid.html(data);
-							editlnid.show(); editlnid.html(data);
-						} else if(column_name == 'Surname') {
-							surid.show(); surid.html(data);
-							editsurid.show(); editsurid.html(data);
-						} else if(column_name == 'Village_Name') {
-							vid.show();	vid.html(data);
-							sid.show();	sid.html(data);
-							//vpid.show(); vpid.html(data);
-						} else {
-							sid.show();	sid.html(data);
-						}
-						//vid.show();	vid.html(data);
-						//fnid.show(); fnid.html(data);
-						//lnid.show(); lnid.html(data);
-						//surid.show(); surid.html(data);
+						sid.show();
+						sid.html(data);
 						object.css("background", "#FFF");
 					}
 				});
@@ -493,15 +403,9 @@
 		});
 
 		function selectResult(val, id, f_id) {
-			//alert(val);
-			//alert(id);
 			//alert(f_id);
 			$("#" + id).val(val);
 			$("#" + id + "-suggesstion-box").hide();
-			$("#village-name-suggesstion-box").hide();
-			//$("#fn-suggesstion-box").hide();
-			//$("#ln-suggesstion-box").hide();
-			//$("#surname-suggesstion-box").hide();
 			if(id == "village-name")
 			{
 				//alert(f_id);
@@ -509,17 +413,8 @@
 			}
 			else
 			{
-				//alert(val);
 				$("#" + id).val(f_id);
 				$("#village-person-name[data-person="+id+"]").val(val);
-				
-				$("#village-id").val(f_id);
-				//$("#village-name[data-vlgname='vlgname']").attr('value',val);
-				$(".addvlgname").val(val);
-				
-				//$(".addfirstname").val(val);
-				//$(".addlastname").val(val);
-				//$(".addsurname").val(val);
 			}
 
 			if(id == "search-village-name")
@@ -527,31 +422,6 @@
 				//alert(f_id);
 				$("#search-village-id").val(f_id);
 			}
-		}
-		function selectResultFirst_Name(val, id, f_id) {
-			//$("#" + id).val(val);
-			$("#fn-suggesstion-box").hide();
-			$("#fn-"+ id +"-suggesstion-box").hide();
-			$("#" + id).val(f_id);				
-			$(".addfirstname").val(val);			
-			$(".editfirstname").val(val);			
-		}
-		function selectResultLast_Name(val, id, f_id) {
-			//$("#" + id).val(val);
-			$("#ln-suggesstion-box").hide();
-			$("#ln-"+ id +"-suggesstion-box").hide();
-			$("#" + id).val(f_id);				
-			$(".addlastname").val(val);			
-			$(".editlastname").val(val);			
-		}
-		function selectResultSurname(val, id, f_id) {
-			//$("#" + id).val(val);
-			//alert(id);
-			$("#surname-suggesstion-box").hide();
-			$("#surname-"+ id +"-suggesstion-box").hide();
-			$("#" + id).val(f_id);				
-			$(".addsurname").val(val);			
-			$(".editsurname").val(val);			
 		}
 
 		$('#tab-action a').click(function (link) {

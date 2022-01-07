@@ -24,7 +24,15 @@ while($row_search = mysqli_fetch_array($search_query))
 {
     $id = (isset($row_search['ID']))?$row_search['ID']:'';
 ?>
-    <li onClick="selectResult('<?php echo $row_search[$column]; ?>', '<?php echo $_POST["id"]; ?>', <?php echo $id; ?>);"><?php echo $row_search[$column]; ?></li>
+    <?php if($column == 'First_Name') { ?>
+        <li onClick="selectResultFirst_Name('<?php echo $row_search[$column]; ?>', '<?php echo $_POST["id"]; ?>', <?php echo $id; ?>);"><?php echo $row_search[$column]; ?></li>
+    <?php } else if($column == 'Last_Name') { ?>
+        <li onClick="selectResultLast_Name('<?php echo $row_search[$column]; ?>', '<?php echo $_POST["id"]; ?>', <?php echo $id; ?>);"><?php echo $row_search[$column]; ?></li>
+    <?php } else if($column == 'Surname') { ?>
+        <li onClick="selectResultSurname('<?php echo $row_search[$column]; ?>', '<?php echo $_POST["id"]; ?>', <?php echo $id; ?>);"><?php echo $row_search[$column]; ?></li>
+    <?php } else { ?>
+        <li onClick="selectResult('<?php echo $row_search[$column]; ?>', '<?php echo $_POST["id"]; ?>', <?php echo $id; ?>);"><?php echo $row_search[$column]; ?></li>
+    <?php } ?>
 <?php
 }
 ?>

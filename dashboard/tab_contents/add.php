@@ -20,7 +20,7 @@
 						<label>First Name</label>
 					</div>
 					<div class="form-group col-sm-6">
-						<input type="text" class="form-control" name="fn" id="fn" autocomplete="on" />
+						<input type="text" class="form-control addfirstname" name="fn" id="fn" autocomplete="off" />
 						<div id="fn-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
@@ -31,7 +31,7 @@
 						<label>Last Name</label>
 					</div>
 					<div class="form-group col-sm-6">
-			    		<input type="text" class="form-control" name="ln" id="ln" autocomplete="off" />
+			    		<input type="text" class="form-control addlastname" name="ln" id="ln" autocomplete="off" />
 						<div id="ln-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
@@ -42,7 +42,7 @@
 						<label>Surname</label>
 					</div>
 					<div class="form-group col-sm-6">
-			    		<input type="text" class="form-control" name="surname" id="surname" autocomplete="off" />
+			    		<input type="text" class="form-control addsurname" name="surname" id="surname" autocomplete="off" />
 						<div id="surname-suggesstion-box"></div>
 			    	</div>
 			    	<div class="col-sm-3"></div>
@@ -53,7 +53,7 @@
 						<label>Village Name</label>
 					</div>
 					<div class="form-group col-sm-6">
-			    		<input type="text" class="form-control" name="village-name" id="village-name" autocomplete="off" />
+			    		<input type="text" class="form-control addvlgname" name="village-name" id="village-name" autocomplete="off" />
 						<input type="hidden" class="form-control" name="village-id" id="village-id"/>
 						<div id="village-name-suggesstion-box"></div>
 			    	</div>
