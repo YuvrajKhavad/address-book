@@ -25,8 +25,8 @@
 		<tr>
 			<th>No</th>
 			<th>Village</th>
-			<th>Taluka</th>
 			<th>District</th>
+			<th>Taluka</th>
 			<th>Action</th>
 		</tr>
 	</thead>
@@ -35,15 +35,26 @@
 			//include('../../include/db.php');
 			$res = mysqli_query($con, "SELECT * FROM `location`");
 			$count = 1;
+			$array_count = 1;
 			$tr = "";
 			$sum = 0;
+			$districts = array("અમદાવાદ", "અમરેલી" , "આણંદ", "અરવલ્લી", "બનાસકાંઠા", "ભરૂચ", "ભાવનગર", "બોટાદ", "છોટા ઉદેપુર", " દાહોદ", "ડાંગ (આહવા)", "દેવભૂમિ દ્વારકા", "ગાંધીનગર", "ગીર સોમનાથ","જામનગર","જુનાગઢ","કચ્છ","ખેડા (નડિયાદ)","મહીસાગર","મહેસાણા"," મોરબી"," નર્મદા (રાજપીપળા)","નવસારી","પંચમહાલ (ગોધરા)","પાટણ","પોરબંદર","રાજકોટ","સાબરકાંઠા(હિંમતનગર)","સુરત","સુરેન્દ્રનગર","તાપી (વ્યારા)","વડોદરા", "વલસાડ");
 			while($row = mysqli_fetch_array($res))
 			{
 				$tr .= '<tr id="'.$row['ID'].'">
 							<td>'.$count.'</td>
 							<td>'.$row['Village_Name'].'</td>
-							<td>'.$row['Taluka_Name'].'</td>
-							<td>'.$row['District_Name'].'</td>
+							<td>';
+							$tr .= '<select name="district" id="districts">';
+							$district_name = $row['District_Name'];
+							foreach($districts as $district)
+							{
+								$selected = ($district == $district_name)?' selected':'';
+								$tr .= '<option value="'.$district.'" '.$selected.'>'.$district.'</option>';
+							}
+							$tr .= '</select>
+							</td>';
+							$tr .= '<td>'.$row['District_Name'].'</td>
 							<td><button class="btn btn-danger" id="'.$row['ID'].'">Delete </button></td>
 					  </tr>';
 				$count++;
