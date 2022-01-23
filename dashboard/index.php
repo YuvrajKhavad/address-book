@@ -102,7 +102,7 @@
 		var search_by_village = $("#search-village-name");
 		var search_by_amout = $("#search-by-amout");
 		var search_by_name = $("#search-by-name");
-		
+
 		$(document).ready(function () {
 			//alert(village_name);
 			//reset btn
@@ -327,7 +327,6 @@
 					search_ajax_call($(this).val(), ln, addln, 'Last_Name');
 				}
 			});
-			
 
 			// Search amout
 			amount.keyup(function () {
@@ -489,6 +488,30 @@
 				alert( "Handler for .keyup() called." );
 			});
 
+			// select event on select box
+			$('.districts').change(function() {
+				//alert($(this).val());
+
+				var district = $(this).val();
+				//alert(district);
+
+				$.ajax({
+					url: 'tasks/search/taluka.php',
+					type: 'POST',
+					//data: district,
+					data: 'district=' + district,
+					//: true,
+					success: function (data) {
+						//$('#view').html(data);
+						alert(data);
+						$(this).closest("td").html(data);
+					},
+					//cache: false,
+					//contentType: false,
+					//processData: false
+				});
+			});
+
 		});
 
 		function selectResult(val, id, f_id) {
@@ -511,11 +534,11 @@
 				//alert(val);
 				$("#" + id).val(f_id);
 				$("#village-person-name[data-person="+id+"]").val(val);
-				
+
 				$("#village-id").val(f_id);
 				//$("#village-name[data-vlgname='vlgname']").attr('value',val);
 				$(".addvlgname").val(val);
-				
+
 				//$(".addfirstname").val(val);
 				//$(".addlastname").val(val);
 				//$(".addsurname").val(val);
@@ -531,26 +554,26 @@
 			//$("#" + id).val(val);
 			$("#fn-suggesstion-box").hide();
 			$("#fn-"+ id +"-suggesstion-box").hide();
-			$("#" + id).val(f_id);				
-			$(".addfirstname").val(val);			
-			$(".editfirstname").val(val);			
+			$("#" + id).val(f_id);
+			$(".addfirstname").val(val);
+			$(".editfirstname").val(val);
 		}
 		function selectResultLast_Name(val, id, f_id) {
 			//$("#" + id).val(val);
 			$("#ln-suggesstion-box").hide();
 			$("#ln-"+ id +"-suggesstion-box").hide();
-			$("#" + id).val(f_id);				
-			$(".addlastname").val(val);			
-			$(".editlastname").val(val);			
+			$("#" + id).val(f_id);
+			$(".addlastname").val(val);
+			$(".editlastname").val(val);
 		}
 		function selectResultSurname(val, id, f_id) {
 			//$("#" + id).val(val);
 			//alert(id);
 			$("#surname-suggesstion-box").hide();
 			$("#surname-"+ id +"-suggesstion-box").hide();
-			$("#" + id).val(f_id);				
-			$(".addsurname").val(val);			
-			$(".editsurname").val(val);			
+			$("#" + id).val(f_id);
+			$(".addsurname").val(val);
+			$(".editsurname").val(val);
 		}
 
 		$('#tab-action a').click(function (link) {

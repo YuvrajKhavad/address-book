@@ -1,4 +1,4 @@
-<form class="form-vertical" role="form" id="SearchForm">
+<!--form class="form-vertical" role="form" id="SearchForm">
 	<div class="form-group mb-2">
 		<input type="text" name = "search-village-name" class="form-control" id="search-village-name" placeholder="Search Village Name">
 		<input type="hidden" class="form-control" name="search-village-id" id="search-village-id"/>
@@ -18,7 +18,7 @@
 	<div class="form-group mx-sm-3 mb-2">
 		<input type="submit" class="btn btn-success mb-2 search-button" value="Find"/>
 	</div>
-</form>
+</form-->
 <p class="text-center" id="deleteRes"></p>
 <table class="table table-condensed table-responsive">
 	<thead>
@@ -43,19 +43,19 @@
 			{
 				$tr .= '<tr id="'.$row['ID'].'">
 							<td>'.$count.'</td>
-							<td>'.$row['Village_Name'].'</td>
+							<td><input type="text" name="village-name" class="form-control" value="'.$row["Village_Name"].'"/></td>
 							<td>';
-							$tr .= '<select name="district" id="districts">';
-							$district_name = $row['District_Name'];
-							foreach($districts as $district)
-							{
-								$selected = ($district == $district_name)?' selected':'';
-								$tr .= '<option value="'.$district.'" '.$selected.'>'.$district.'</option>';
-							}
-							$tr .= '</select>
+								$tr .= '<select name="district" class="districts">';
+								$district_name = $row['District_Name'];
+								foreach($districts as $district)
+								{
+									$selected = ($district == $district_name)?' selected':'';
+									$tr .= '<option value="'.$district.'" '.$selected.'>'.$district.'</option>';
+								}
+								$tr .= '</select>
 							</td>';
-							$tr .= '<td>'.$row['District_Name'].'</td>
-							<td><button class="btn btn-danger" id="'.$row['ID'].'">Delete </button></td>
+							$tr .= '<td class = "taluka-list"></td>';
+							$tr .= '<td><button class="btn btn-success edit" id="'.$row['ID'].'">Update</button></td>
 					  </tr>';
 				$count++;
 
