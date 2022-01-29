@@ -45,12 +45,14 @@
 							<td>'.$count.'</td>
 							<td><input type="text" name="village-name" class="form-control" value="'.$row["Village_Name"].'"/></td>
 							<td>';
-								$tr .= '<select name="district" class="districts">';
+								$tr .= '<select id="data-'.$count.'" name="district" class="districts">';
 								$district_name = $row['District_Name'];
+								//$district_count = 1;
 								foreach($districts as $district)
 								{
 									$selected = ($district == $district_name)?' selected':'';
 									$tr .= '<option value="'.$district.'" '.$selected.'>'.$district.'</option>';
+									//$district_count++;
 								}
 								$tr .= '</select>
 							</td>';

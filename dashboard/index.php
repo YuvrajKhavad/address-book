@@ -490,25 +490,15 @@
 
 			// select event on select box
 			$('.districts').change(function() {
-				//alert($(this).val());
-
+				var obj = $(this);
 				var district = $(this).val();
-				//alert(district);
-
 				$.ajax({
 					url: 'tasks/search/taluka.php',
 					type: 'POST',
-					//data: district,
 					data: 'district=' + district,
-					//: true,
 					success: function (data) {
-						//$('#view').html(data);
-						alert(data);
-						$(this).closest("td").html(data);
+						$(obj).parent().next('td').html(data);
 					},
-					//cache: false,
-					//contentType: false,
-					//processData: false
 				});
 			});
 
