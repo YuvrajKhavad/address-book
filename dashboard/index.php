@@ -244,7 +244,55 @@
 				 	// contentType: false,
 				 	// processData: false
 				 });
-			})
+			});
+
+			$(document).on("click",".update-village",function()
+			{
+				var id = event.target.id;
+				var error = false;
+				var village_name = $("#village-"+id+" input[name='edit-village-name']").val();
+				var village_district = $("#village-"+id+" .districts").find(":selected").val();
+				var village_taluka = $("#village-"+id+" .talukas").find(":selected").val();
+				if(village_name == "")
+				{
+					error = true;
+				}
+
+				if(village_district == "")
+				{
+					error = true;
+				}
+
+				if(village_taluka == "")
+				{
+					error = true;
+				}
+
+				if(error == true)
+				{
+					alert("Please add and select all filed");
+					return false;
+				}
+				else
+				{
+					$.ajax({
+						url: 'tasks/edit-village/',
+						type: 'POST',
+						data:
+						{
+							id : id,
+							village : village_name,
+							district : village_district,
+							taluka : village_taluka
+						},
+						success: function (data)
+						{
+							//alert(data);
+							$("#village-message").html(data);
+						},
+					});
+				}
+			});
 
 			$(document).on('keyup','#village-person-name',function( e ) {
 				$("#village-id").val("");
@@ -484,20 +532,53 @@
 				});
 			});
 
+			$(document).on("submit", "#SearchFormVillage", function (e) {
+				e.preventDefault();
+				var formData = new FormData($(this)[0]);
+				$.ajax({
+					url: 'tasks/search/search-taluka.php',
+					type: 'POST',
+					data: formData,
+					async: true,
+					success: function (data) {
+						$('#table-boday-village').html(data);
+						
+					},
+					cache: false,
+					contentType: false,
+					processData: false
+				});
+			});
+
 			$( "#target" ).keyup(function() {
 				alert( "Handler for .keyup() called." );
 			});
 
 			// select event on select box
-			$('.districts').change(function() {
+			$(document).on("change", ".districts", function (e) {
+			//$('.districts').change(function() {
 				var obj = $(this);
 				var district = $(this).val();
 				$.ajax({
 					url: 'tasks/search/taluka.php',
 					type: 'POST',
-					data: 'district=' + district,
+					data: 'district=' + district + '&type=no-search',
 					success: function (data) {
 						$(obj).parent().next('td').html(data);
+					},
+				});
+			});
+
+			// select event on select box
+			$(document).on("change", ".search-districts", function (e) {
+			//$('.search-districts').change(function() {
+				var district = $(this).val();
+				$.ajax({
+					url: 'tasks/search/taluka.php',
+					type: 'POST',
+					data: 'district=' + district + '&type=search',
+					success: function (data) {
+						$(".search-talukas-list").html(data);
 					},
 				});
 			});
